@@ -45,6 +45,11 @@ def main():
                 os.makedirs(upload_dir)
             with open(os.path.join(upload_dir, file_name), 'wb') as file:
                 for i in range(0, chunks):
+                    """
+                    I should probably use a while-loop
+                    and then check if I get data or not and
+                    if not we just break the loop.
+                    """
                     _data = client_sock.recv(BUFFER)
                     print(_data)
                     file.write(_data)
