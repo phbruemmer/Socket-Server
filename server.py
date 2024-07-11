@@ -55,16 +55,34 @@ def main():
                     file.write(_data)
                     time.sleep(.1)
 
+        def handle_download():
+            pass
+
+        def dirs():
+            pass
+
+        def helper():
+            pass
+
         data = client_sock.recv(BUFFER)
         data = data.decode()
         decrypted_data = encryption.decrypt(data)
         print(decrypted_data)
+
         if decrypted_data == '$upload':
             handle_upload()
-
-        client_sock.sendall(data.encode())
-        if data == "exit":
+        elif decrypted_data == "$download":
+            handle_download()
+        elif decrypted_data == "$dirs":
+            dirs()
+        elif decrypted_data == "$help":
+            helper()
+        elif decrypted_data == "$exit":
+            client_sock.shutdown(socket.SHUT_RDWR)
             client_sock.close()
+            return
+        else:
+            client_sock.sendall(data.encode())
         loop(client_sock)
 
     accept()

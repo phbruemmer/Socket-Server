@@ -31,8 +31,7 @@ def main():
         print("Something went wrong.\nTry to contact the server host. (Probably the Server is not online.)")
         exit(-1)
 
-    while True:
-        chat()
+    chat()
 
 
 def file_uploader():
@@ -61,10 +60,19 @@ def file_uploader():
 
 def chat():
     msg = input("> ")
+
+    if msg == "$exit":
+        msg = encryption.encrypt_data("$exit", True)
+        s.send(msg.encode())
+        s.shutdown(socket.SHUT_RDWR)
+        s.close()
+        return
+
     if msg == "$upload":
         file_uploader()
     else:
         send(msg)
+    chat()
 
 
 def send(msg):
@@ -72,6 +80,7 @@ def send(msg):
     s.send(msg.encode())
     time.sleep(.1)
     recv()
+
 
 def recv():
     msg = s.recv(buffer)

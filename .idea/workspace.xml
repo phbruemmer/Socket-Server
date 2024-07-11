@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9c9299c-d8cf-4db0-8647-008b7fd325c6" name="Changes" comment="- Added upload functionality to server and client&#10;- Added encryption to normal messages or commands">
-      <change afterPath="$PROJECT_DIR$/.idea/Server.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="b9c9299c-d8cf-4db0-8647-008b7fd325c6" name="Changes" comment="- server side saved files">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,11 +141,38 @@
       <option name="project" value="LOCAL" />
       <updated>1720644691590</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="- Small changes in server.py">
+      <option name="closed" value="true" />
+      <created>1720648984145</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1720648984145</updated>
+    </task>
+    <task id="LOCAL-00003" summary="- More files">
+      <option name="closed" value="true" />
+      <created>1720649010233</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1720649010233</updated>
+    </task>
+    <task id="LOCAL-00004" summary="- server side saved files">
+      <option name="closed" value="true" />
+      <created>1720649044697</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1720649044697</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="- Added upload functionality to server and client&#10;- Added encryption to normal messages or commands" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Added upload functionality to server and client&#10;- Added encryption to normal messages or commands" />
+    <MESSAGE value="- Small changes in server.py" />
+    <MESSAGE value="- More files" />
+    <MESSAGE value="- server side saved files" />
+    <option name="LAST_COMMIT_MESSAGE" value="- server side saved files" />
   </component>
 </project>
