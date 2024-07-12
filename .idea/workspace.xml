@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9c9299c-d8cf-4db0-8647-008b7fd325c6" name="Changes" comment="- server side saved files">
+    <list default="true" id="b9c9299c-d8cf-4db0-8647-008b7fd325c6" name="Changes" comment="- Added exit() -function to server and client.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/client.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,7 +163,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720649044697</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="- Added exit() -function to server and client.">
+      <option name="closed" value="true" />
+      <created>1720685843886</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1720685843886</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -173,6 +179,7 @@
     <MESSAGE value="- Small changes in server.py" />
     <MESSAGE value="- More files" />
     <MESSAGE value="- server side saved files" />
-    <option name="LAST_COMMIT_MESSAGE" value="- server side saved files" />
+    <MESSAGE value="- Added exit() -function to server and client." />
+    <option name="LAST_COMMIT_MESSAGE" value="- Added exit() -function to server and client." />
   </component>
 </project>

@@ -58,6 +58,29 @@ def file_uploader():
         print(err)
 
 
+def file_downloader():
+    """
+    - Input Filename
+    - check if file exists
+        - If file exists, start download...
+    :return:
+    """
+    def check_filename(f):
+        valid_file = False
+        s.send(f)
+        time.sleep(.1)
+        validation = s.recv(1024)
+        if validation == f:
+            valid_file = True
+        return valid_file
+
+    print("# # # # # # #\nF I L E N A M E\n# # # # # # #\n")
+    filename = input("(filename) > ")
+    s.send(encryption.encrypt_data('$download', True).encode())
+    if check_filename(filename):
+        pass
+
+
 def chat():
     msg = input("> ")
 
@@ -70,6 +93,8 @@ def chat():
 
     if msg == "$upload":
         file_uploader()
+    elif msg == "$download":
+        file_downloader()
     else:
         send(msg)
     chat()
