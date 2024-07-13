@@ -6,7 +6,7 @@ import encryption
 
 HOST_NAME = socket.gethostname()
 HOST = socket.gethostbyname(HOST_NAME)
-HOST = "172.31.6.223"
+HOST = "127.0.0.1"
 PORT = 6544
 
 BUFFER = 64000
@@ -35,28 +35,45 @@ def main():
 
     def loop(client_sock):
         def handle_upload():
+            def check_file_names():
+                if os.path.exists(os.path.join(upload_dir, file_name)):
+                    client_sock.sendall("$file-exists".encode())
+                else:
+                    client_sock.sendall(file_name.encode())
             upload_dir = "./uploaded_files/"
-            time.sleep(.1)
-            file_size = int(client_sock.recv(BUFFER).decode())
-            chunks = file_size // 1024
-            time.sleep(.1)
             file_name = client_sock.recv(BUFFER).decode()
             if not os.path.exists(upload_dir):
                 os.makedirs(upload_dir)
+            check_file_names()
+
             with open(os.path.join(upload_dir, file_name), 'wb') as file:
-                for i in range(0, chunks):
-                    """
-                    I should probably use a while-loop
-                    and then check if I get data or not and
-                    if not we just break the loop.
-                    """
+                while not _data.decode() == "$upload-finished":
                     _data = client_sock.recv(BUFFER)
-                    print(_data)
+                    print(_data.decode())
                     file.write(_data)
                     time.sleep(.1)
 
         def handle_download():
-            pass
+            uploaded_files = "./uploaded_files/"
+            filename = client_sock.recv(BUFFER).decode()
+            file_path = uploaded_files + filename
+            time.sleep(.1)
+            if os.path.exists(file_path):
+                client_sock.sendall(str(os.path.getsize(file_path)).encode())
+            else:
+                client_sock.sendall("0".encode())
+                return
+            time.sleep(.1)
+            with open(file_path, "rb") as file:
+                file_chunk = file.read(1024)
+                print(file_chunk.decode())
+                client_sock.sendall(file_chunk)
+                while not file_chunk.decode() == "":
+                    print(file_chunk)
+                    file_chunk = file.read(1024)
+                    client_sock.sendall(file_chunk)
+                    time.sleep(.1)
+                client_sock.sendall("$download-finished".encode())
 
         def dirs():
             pass
