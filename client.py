@@ -34,42 +34,43 @@ def main():
     chat()
 
 
-def check_filename(f):
-    valid_file_ = False
-    s.send(f.encode())
-    time.sleep(.1)
-    validation = s.recv(BUFFER).decode()
-    if int(validation) > 0:
-        valid_file_ = True
-    return valid_file_
-
-
 def file_uploader():
-    def check_basename(f):
-        def rename_serverside_file():
-            print("# # #\nF I L E N A M E - E X I S T S\n# # #")
-            rename_file = input("Do you want to rename the file for the serverside? (y/n)")
-            if rename_file == "n":
-                return False
-            new_filename = input("(filename) > ")
-            return new_filename
+    def rename_serverside_file():
+        print("# # #\nF I L E - A L R E A D Y - E X I S T S\n# # #\n")
+        rename = input("Do you want to rename your file for the upload? (y/n)")
+        if rename == "n":
+            s.send("$n".encode())
+            return None
+        s.send("$y".encode())
+        new_filename_ = input("(filename) > ")
+        while not check_serverside_files(new_filename_):
+            rename_serverside_file()
+            break
+        return new_filename_
+
+    def check_serverside_files(f):
+        file_available = True
         s.send(f.encode())
-        time.sleep(.1)
         check = s.recv(BUFFER).decode()
         if check == "$file-exists":
-            rename = rename_serverside_file()
-            if not rename:
-                return False
-        
+            file_available = False
+        return file_available
 
     print("# # # # # # #\nE N T E R - P A T H\n# # # # # # #\n")
     path = input("(path) > ")
-    s.send(encryption.encrypt_data('$upload', True).encode())
-    time.sleep(.1)
-    file_name = os.path.basename(path)
-    if not check_basename(file_name):
+
+    if not os.path.exists(path):
+        print("# # #\nP A T H - D O E S - N O T - E X I S T\n# # #")
         return
-    s.send(file_name.encode())
+
+    s.send(encryption.encrypt_data('$upload', True).encode())
+    file_name = os.path.basename(path)
+
+    if not check_serverside_files(file_name):
+        new_filename = rename_serverside_file()
+        if new_filename is None:
+            return
+
     with open(path, 'rb') as file:
         file_chunk = file.read(BUFFER)
         s.send(file_chunk)
@@ -84,13 +85,16 @@ def file_uploader():
 
 
 def file_downloader():
-    """
-    - Input Filename
-    - check if file exists
-        - If file exists, start download...
-    :return:
-    """
     download_dir = "./downloaded_files/"
+
+    def check_filename(f):
+        valid_file_ = False
+        s.send(f.encode())
+        time.sleep(.1)
+        validation = s.recv(BUFFER).decode()
+        if int(validation) > 0:
+            valid_file_ = True
+        return valid_file_
 
     def check_download_space(f):
         valid_space = False
@@ -130,11 +134,10 @@ def file_downloader():
         return
     with open(os.path.join(download_dir, filename), "wb") as file:
         file_data = s.recv(BUFFER)
-        file.write(file_data)
         print(file_data.decode())
         while not file_data.decode() == "$download-finished":
-            file_data = s.recv(BUFFER)
             file.write(file_data)
+            file_data = s.recv(BUFFER)
             print(file_data.decode())
             time.sleep(.1)
 

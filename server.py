@@ -35,16 +35,21 @@ def main():
 
     def loop(client_sock):
         def handle_upload():
-            def check_file_names():
-                if os.path.exists(os.path.join(upload_dir, file_name)):
-                    client_sock.sendall("$file-exists".encode())
-                else:
-                    client_sock.sendall(file_name.encode())
+            def rename_sequence():
+                pass
+
+            def check_rename_request():
+                rename_request = True
+                request_data = client_sock.recv(BUFFER).decode()
+                if request_data == "$n":
+                    rename_request = False
+                return rename_request
             upload_dir = "./uploaded_files/"
-            file_name = client_sock.recv(BUFFER).decode()
-            if not os.path.exists(upload_dir):
-                os.makedirs(upload_dir)
-            check_file_names()
+            file_name = s.recv(BUFFER).decode()
+            if os.path.exists(os.path.join(upload_dir, file_name)):
+                client_sock.sendall(b'$file-exists')
+                if check_rename_request():
+                    rename_sequence()
 
             with open(os.path.join(upload_dir, file_name), 'wb') as file:
                 while not _data.decode() == "$upload-finished":
