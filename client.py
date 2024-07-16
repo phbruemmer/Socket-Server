@@ -1,4 +1,5 @@
 import socket
+import struct
 import time
 import os
 import encryption
@@ -35,43 +36,76 @@ def main():
 
 
 def file_uploader():
-    def rename_serverside_file():
-        print("# # #\nF I L E - A L R E A D Y - E X I S T S\n# # #\n")
-        rename = input("Do you want to rename your file for the upload? (y/n)")
-        if rename == "n":
-            s.send("$n".encode())
-            return None
-        s.send("$y".encode())
-        new_filename_ = input("(filename) > ")
-        while not check_serverside_files(new_filename_):
-            rename_serverside_file()
-            break
-        return new_filename_
-
-    def check_serverside_files(f):
-        file_available = True
+    def check_server_space(f):
+        """
+        - Sends filename to server
+        - Server response with boolean (True / False)
+            (True if file does not exist / False if file exists)
+        :param f:
+        :return:
+        """
         s.send(f.encode())
-        check = s.recv(BUFFER).decode()
-        if check == "$file-exists":
+        time.sleep(.1)
+        response = struct.unpack('?', s.recv(1))[0]
+        print(response)                                                                                 # Debugging Help
+        return response
+
+    def ask_rename():
+        """
+        - send change name request to server
+        - server starts change name sequence
+        - send new name
+        - server response with boolean (True / False)
+            (If True continue program / If False ask for another name)
+        :return:
+        """
+        rename_seq = False
+        print("# # #\nF I L E - A L R E A D Y - E X I S T S\n# # #")
+        rename = input("Do you want to rename the file? (y/n)")
+        if rename == "y":
+            rename_seq = True
+        s.send(struct.pack('?', rename_seq))
+        print(rename_seq)
+        return rename_seq
+
+    def rename_file():
+        file_available = True
+        print("# # #\nR E N A M E - F I L E\n# # #")
+        new_file_name = input("(filename) > ")
+        file_space = check_server_space(new_file_name)
+        if not file_space:
             file_available = False
-        return file_available
+        return file_available, new_file_name
 
-    print("# # # # # # #\nE N T E R - P A T H\n# # # # # # #\n")
-    path = input("(path) > ")
+    print("# # # # # # #\nF I L E P A T H\n# # # # # # #\n")
+    filepath = input("(filepath) > ")
+    basename = os.path.basename(filepath)
 
-    if not os.path.exists(path):
-        print("# # #\nP A T H - D O E S - N O T - E X I S T\n# # #")
+    # Check if filepath exists
+    if not os.path.exists(filepath):
+        print("# # #\nN O - S U C H - P A T H - F O U N D\n# # #")
         return
 
+    # Initialize upload sequence on server-side
+    # Encrypt command with encryption.py - encrypt function (important)
     s.send(encryption.encrypt_data('$upload', True).encode())
-    file_name = os.path.basename(path)
 
-    if not check_serverside_files(file_name):
-        new_filename = rename_serverside_file()
-        if new_filename is None:
+    # Check if server-path is available or not
+    server_space_available = check_server_space(basename)
+
+    if not server_space_available:
+        start_renaming = ask_rename()
+        if not start_renaming:
             return
+        new_filename_available, new_filename = rename_file()
+        while not new_filename_available:
+            new_filename_available, new_filename = rename_file()
+        basename = new_filename
 
-    with open(path, 'rb') as file:
+    # Send new / old filename
+    s.send(basename.encode())
+
+    with open(filepath, 'rb') as file:
         file_chunk = file.read(BUFFER)
         s.send(file_chunk)
         while file_chunk:

@@ -1,11 +1,12 @@
 import os
 import socket
+import struct
 import time
 
 import encryption
 
 HOST_NAME = socket.gethostname()
-HOST = socket.gethostbyname(HOST_NAME)
+# HOST = socket.gethostbyname(HOST_NAME)
 HOST = "127.0.0.1"
 PORT = 6544
 
@@ -35,35 +36,52 @@ def main():
 
     def loop(client_sock):
         def handle_upload():
+            upload_dir = "./uploaded_files/"
+
             def check_path(f):
+                print("Checking path...")
+                path_free = True
                 if os.path.exists(os.path.join(upload_dir, f)):
-                    client_sock.sendall(b'$file-exists')
-                    if check_rename_request():
-                        rename_sequence()
-                return f
+                    path_free = False
+                client_sock.sendall(struct.pack('?', path_free))
+                return path_free
+
+            def rename_response():
+                response = struct.unpack('?', client_sock.recv(1))[0]
+                print(response)                                                                             # Debugging
+                return response
 
             def rename_sequence():
+                """
+                - request new name...
+                - check availability
+                    (if available return True / if not available return False)
+                :return:
+                """
                 new_filename = client_sock.recv(BUFFER).decode()
-                check_path(new_filename)
+                while not check_path(new_filename):
+                    new_filename = client_sock.recv(BUFFER).decode()
 
-            def check_rename_request():
-                rename_request = True
-                request_data = client_sock.recv(BUFFER).decode()
-                if request_data == "$n":
-                    rename_request = False
-                return rename_request
+            filename = client_sock.recv(BUFFER).decode()
 
-            upload_dir = "./uploaded_files/"
-            file_name = client_sock.recv(BUFFER).decode()
-            file_name = check_path(file_name)
+            path_available = check_path(filename)
 
-            with open(os.path.join(upload_dir, file_name), 'wb') as file:
+            if not path_available:
+                ask_rename_response = rename_response()
+                if not ask_rename_response:
+                    return
+                else:
+                    rename_sequence()
+
+            filename = client_sock.recv(BUFFER).decode()
+            print(filename)
+
+            with open(os.path.join(upload_dir, filename), 'wb') as file:
                 _data = client_sock.recv(BUFFER)
-                file.write(_data)
-                while not _data.decode() == "$upload-finished":
-                    _data = client_sock.recv(BUFFER)
+                while not _data == b"$upload-finished":
                     print(_data.decode())
                     file.write(_data)
+                    _data = client_sock.recv(BUFFER)
                     time.sleep(.1)
 
         def handle_download():
@@ -90,7 +108,6 @@ def main():
 
         def dirs():
             pass
-
 
         def helper():
             pass
