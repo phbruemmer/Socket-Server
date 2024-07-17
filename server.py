@@ -107,7 +107,12 @@ def main():
                 client_sock.sendall("$download-finished".encode())
 
         def dirs():
-            pass
+            uploaded_files = './uploaded_files/'
+            print(os.listdir(uploaded_files))
+            for i in os.listdir(uploaded_files):
+                client_sock.sendall(i.encode())
+                time.sleep(.1)
+            client_sock.sendall(b'$end-li')
 
         def helper():
             pass
