@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9c9299c-d8cf-4db0-8647-008b7fd325c6" name="Changes" comment="- temp">
+    <list default="true" id="b9c9299c-d8cf-4db0-8647-008b7fd325c6" name="Changes" comment="- small structure changes in client.py&#10;- More commenting">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/client.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploaded_files/encryption.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +25,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "phbruemmer"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/phbruemmer/Socket-Server.git",
+    "accountId": "2b92bd18-1aee-4ecf-9d00-0d92cec588c9"
+  }
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -51,6 +64,7 @@
   <component name="RunManager" selected="Python.client">
     <configuration name="client" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Server" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -73,6 +87,7 @@
     </configuration>
     <configuration name="encryption" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Server" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -94,6 +109,7 @@
     </configuration>
     <configuration name="server" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Server" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -218,7 +234,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721148818146</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="- small structure changes in client.py&#10;- More commenting">
+      <option name="closed" value="true" />
+      <created>1721227347925</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1721227347925</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -232,6 +256,7 @@
     <MESSAGE value="- Upload function not finished&#10;   - Continue tomorrow" />
     <MESSAGE value="- Upload function fixed&#10;    - More edge cases covered&#10;- More commenting" />
     <MESSAGE value="- temp" />
-    <option name="LAST_COMMIT_MESSAGE" value="- temp" />
+    <MESSAGE value="- small structure changes in client.py&#10;- More commenting" />
+    <option name="LAST_COMMIT_MESSAGE" value="- small structure changes in client.py&#10;- More commenting" />
   </component>
 </project>
