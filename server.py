@@ -106,6 +106,22 @@ def main():
                     time.sleep(.1)
                 client_sock.sendall("$download-finished".encode())
 
+        def handle_file_remover():
+            uploaded_files = './uploaded_files/'
+
+            def check_files(file):
+                file_exists = True
+                if not os.path.exists(file):
+                    file_exists = False
+                client_sock.sendall(struct.pack('?', file_exists))
+                return file_exists
+
+            filename = client_sock.recv(BUFFER).decode()
+            file_path = os.path.join(uploaded_files, filename)
+            if not check_files(file_path):
+                return
+            os.remove(file_path)
+
         def dirs():
             uploaded_files = './uploaded_files/'
             print(os.listdir(uploaded_files))
@@ -126,6 +142,8 @@ def main():
             handle_upload()
         elif decrypted_data == "$download":
             handle_download()
+        elif decrypted_data == "$rem":
+            handle_file_remover()
         elif decrypted_data == "$dirs":
             dirs()
         elif decrypted_data == "$help":
