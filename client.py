@@ -10,6 +10,7 @@ SERVER_IP = "127.0.0.1"
 PORT = 6544
 BUFFER = 1024
 DOWNLOAD_DIR = "./downloaded_files/"
+symbols = ['\\', '/', ':', '*', '?', '"', '<', '>', '|']
 
 print(HOST_NAME)
 print(HOST)
@@ -27,6 +28,16 @@ def main():
         exit(-1)
 
     chat()
+
+
+def check_valid_filename(file):
+    valid_file = True
+    for i in file:
+        if i in symbols:
+            print("- - - I N V A L I D - F I L E N A M E - - -")
+            valid_file = False
+            break
+    return valid_file
 
 
 def file_uploader():
@@ -54,6 +65,10 @@ def file_uploader():
         file_available = True
         print("# # #\nR E N A M E - F I L E\n# # #")
         new_file_name = input("(filename) > ")
+        while not check_valid_filename(new_file_name):
+            print("# # #\nR E N A M E - F I L E\n# # #")
+            new_file_name = input("(filename) > ")
+
         file_space = check_server_space(new_file_name)
         if not file_space:
             file_available = False
@@ -97,7 +112,6 @@ def file_uploader():
             time.sleep(0.1)
 
     s.send("$upload-finished".encode())
-    print("# F I L E - N O T - F O U N D #")
 
 
 def file_downloader():
@@ -129,6 +143,8 @@ def file_downloader():
 
     print("# # # # # # #\nF I L E N A M E\n# # # # # # #\n")
     filename = input("(filename) > ")
+    if not check_valid_filename(filename):
+        return
     download_file = filename
 
     if not os.path.exists(DOWNLOAD_DIR):
@@ -157,6 +173,25 @@ def file_downloader():
             time.sleep(0.1)
 
 
+def file_remover():
+    def check_filename(file):
+        s.send(file.encode())
+        time.sleep(.1)
+        response = struct.unpack('?', s.recv(1))[0]
+        return response
+
+    print("# # #\nF I L E - T O - R E M O V E\n# # #")
+    filename = input("(filename) > ")
+    if not check_valid_filename(filename):
+        return
+
+    s.send(encryption.encrypt_data("$rem", True).encode())
+    if not check_filename(filename):
+        print("# # #\nF I L E - D O E S - N O T - E X I S T\n# # # ")
+        return
+    print(f"- - - F I L E - {filename} - D E L E T E D - - -")
+
+
 def dirs():
     """Request the directory listing from the server."""
     s.send(encryption.encrypt_data("$dirs", True).encode())
@@ -183,6 +218,8 @@ def chat():
             file_uploader()
         elif msg == "$download":
             file_downloader()
+        elif msg == "$rm":
+            file_remover()
         elif msg == "$dirs":
             dirs()
         else:
