@@ -169,7 +169,6 @@ def file_downloader():
             if file_data.decode() == "$download-finished":
                 break
             file.write(file_data)
-            print(file_data.decode())  # Debugging Help
             time.sleep(0.1)
 
 

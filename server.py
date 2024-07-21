@@ -48,7 +48,6 @@ def main():
 
             def rename_response():
                 response = struct.unpack('?', client_sock.recv(1))[0]
-                print(response)                                                                             # Debugging
                 return response
 
             def rename_sequence():

@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9c9299c-d8cf-4db0-8647-008b7fd325c6" name="Changes" comment="- small structure changes in client.py&#10;- More commenting">
+    <list default="true" id="b9c9299c-d8cf-4db0-8647-008b7fd325c6" name="Changes" comment="- More files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/client.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploaded_files/encryption.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,18 +22,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "phbruemmer"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;phbruemmer&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/phbruemmer/Socket-Server.git",
-    "accountId": "2b92bd18-1aee-4ecf-9d00-0d92cec588c9"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/phbruemmer/Socket-Server.git&quot;,
+    &quot;accountId&quot;: &quot;2b92bd18-1aee-4ecf-9d00-0d92cec588c9&quot;
   }
-}]]></component>
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -64,7 +61,6 @@
   <component name="RunManager" selected="Python.client">
     <configuration name="client" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Server" />
-      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -87,7 +83,6 @@
     </configuration>
     <configuration name="encryption" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Server" />
-      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -109,7 +104,6 @@
     </configuration>
     <configuration name="server" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Server" />
-      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -242,13 +236,44 @@
       <option name="project" value="LOCAL" />
       <updated>1721227347925</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="- Added filename validation">
+      <option name="closed" value="true" />
+      <created>1721487198126</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1721487198126</updated>
+    </task>
+    <task id="LOCAL-00013" summary="- Added filename validation and remove file function">
+      <option name="closed" value="true" />
+      <created>1721487214365</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1721487214365</updated>
+    </task>
+    <task id="LOCAL-00014" summary="- More files">
+      <option name="closed" value="true" />
+      <created>1721487225391</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1721487225391</updated>
+    </task>
+    <task id="LOCAL-00015" summary="- More files">
+      <option name="closed" value="true" />
+      <created>1721487342869</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1721487342869</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="- Added upload functionality to server and client&#10;- Added encryption to normal messages or commands" />
     <MESSAGE value="- Small changes in server.py" />
-    <MESSAGE value="- More files" />
     <MESSAGE value="- server side saved files" />
     <MESSAGE value="- Added exit() -function to server and client." />
     <MESSAGE value="- Started download function in client.py" />
@@ -257,6 +282,9 @@
     <MESSAGE value="- Upload function fixed&#10;    - More edge cases covered&#10;- More commenting" />
     <MESSAGE value="- temp" />
     <MESSAGE value="- small structure changes in client.py&#10;- More commenting" />
-    <option name="LAST_COMMIT_MESSAGE" value="- small structure changes in client.py&#10;- More commenting" />
+    <MESSAGE value="- Added filename validation" />
+    <MESSAGE value="- Added filename validation and remove file function" />
+    <MESSAGE value="- More files" />
+    <option name="LAST_COMMIT_MESSAGE" value="- More files" />
   </component>
 </project>
