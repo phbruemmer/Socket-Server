@@ -130,7 +130,9 @@ def main():
             client_sock.sendall(b'$end-li')
 
         def helper():
-            pass
+            help_msg = ('- - - C O M M A N D S - - -\n\t$upload - To upload a file to the server\n\t$download - To download a file from the server\n\t$rm - To remove a file from the server\n\t'
+                        '$help - To display all commands\n\t$exit - To stop the client and server')
+            client_sock.sendall(encryption.encrypt_data(help_msg, True).encode())
 
         data = client_sock.recv(BUFFER)
         data = data.decode()
